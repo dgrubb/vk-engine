@@ -9,8 +9,11 @@
 #define WINDOW_H
 
 // C++ Library headers
-#include <memory> // unique_ptr
-#include <string> // string
+#include <memory>  // unique_ptr
+#include <string>  // string
+
+// C-style library includes
+#include <cstdint> // uint32_t
 
 // Third-party includes
 #include <SDL2/SDL.h>
@@ -35,7 +38,11 @@ class Window
 
     private:
 
+        // Data
         std::unique_ptr<SDL_Window, void(*)(SDL_Window*)> window;
+
+        // Methods
+        uint32_t GetWindowFlags();
 };
 
 #endif // WINDOW_H

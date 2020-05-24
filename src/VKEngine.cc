@@ -25,7 +25,11 @@ int main()
         return EXIT_FAILURE;
     }
 
-    auto win = std::make_unique<Window>(std::string{VK::name}, 800, 600);
+    auto win = std::make_unique<Window>(
+            std::string{VK::name},
+            VK::defaultWindowWidth,
+            VK::defaultWindowHeight
+    );
 
     INFO("{} v{} ready", VK::name, VK::version);
 
