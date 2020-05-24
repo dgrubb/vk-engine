@@ -22,7 +22,9 @@ INC = -I./ \
 
 # Source files
 SRCS = VKEngine.cc \
-	util/Log.cc
+	components/Window.cc \
+	util/Log.cc \
+	util/Video.cc
 
 OBJS=$(subst .cc,.o,$(SRCS))
 

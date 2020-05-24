@@ -14,7 +14,7 @@
 #include <spdlog/spdlog.h>
 #include <spdlog/sinks/stdout_color_sinks.h>
 
-// Wrapper library specific macros with generic named ones
+// Wrapper library specific macros with generic ones
 #define TRACE(...) \
     SPDLOG_TRACE(__VA_ARGS__);
 
