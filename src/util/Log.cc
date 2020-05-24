@@ -7,11 +7,15 @@
 // the logging library at a later date and I'll only have to update a single 
 // set of files.
 
-// Implementation includes
+// Implementation include
 #include "Log.h"
 
 // C++ library includes
 #include <iostream> // cout, endl
+
+// Third-party libraries
+#include <spdlog/spdlog.h>
+#include <spdlog/sinks/stdout_color_sinks.h>
 
 // Project includes
 #include "VKEngine.h"
