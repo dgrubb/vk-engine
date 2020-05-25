@@ -50,17 +50,30 @@ Window::Window(std::string name, int width, int height)
     int w, h;
     SDL_GetWindowSize(window.get(), &w, &h);
     INFO("Created window [{}]: {}x{}", SDL_GetWindowTitle(window.get()), w, h);
-
-    // Create renderer
 }
 
-// Checks the window flags to ascertain if it's fullscreen or not.
+void Window::Clear()
+{
+    SDL_SetRenderDrawColor(renderer.get(), 255, 255, 255, 255);
+    SDL_RenderClear(renderer.get());
+    Render();
+}
+
 // N.b., fullscreen in this context means truly fullscreen, not whether the
 // window has been scaled to overlay the whole window as determined by
 // SDL_WINDOW_FULLSCREEN_DESKTOP
 bool Window::GetFullscreen()
 {
     return (GetWindowFlags() & SDL_WINDOW_FULLSCREEN);
+}
+
+// Most of the transformations applied through the renderer are applied to an
+// internal buffer and don't get processed by the display until this method is
+// called. In this way operations can be optimised by applying them in
+// succession and procesing them as a batch
+void Window::Render()
+{
+    SDL_RenderPresent(renderer.get());
 }
 
 void Window::SetFullscreen(bool fullscreen)

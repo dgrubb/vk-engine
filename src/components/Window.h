@@ -36,6 +36,9 @@ class Window
         // Setters
         void SetFullscreen(bool fullscreen);
 
+        // Methods
+        void Clear();
+
     private:
 
         // Data
@@ -44,6 +47,7 @@ class Window
 
         // Methods
         uint32_t GetWindowFlags();
+        void Render();
 };
 
 #endif // WINDOW_H
