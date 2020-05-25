@@ -18,15 +18,40 @@
 #include "util/Log.h"
 
 Window::Window(std::string name, int width, int height)
-  : window(SDL_CreateWindow(name.c_str(),
+  :
+    // Request a window context from the windowing provider
+    window(
+        SDL_CreateWindow(
+            name.c_str(),
             SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
             width, height,
-            SDL_WINDOW_OPENGL),
-    SDL_DestroyWindow)
+            SDL_WINDOW_OPENGL
+        ),
+        SDL_DestroyWindow
+    ),
+    // Create an interface for executing render requests against the
+    // new window context
+    renderer(
+        SDL_CreateRenderer(
+            window.get(), -1,
+            (SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC)
+        ),
+        SDL_DestroyRenderer)
 {
+    // Sanity checks
+    if (nullptr == window)
+    {
+        throw std::runtime_error("Failed to create window context");
+    }
+    if (nullptr == renderer)
+    {
+        throw std::runtime_error("Failed to initialise a renderer");
+    }
     int w, h;
     SDL_GetWindowSize(window.get(), &w, &h);
     INFO("Created window [{}]: {}x{}", SDL_GetWindowTitle(window.get()), w, h);
+
+    // Create renderer
 }
 
 // Checks the window flags to ascertain if it's fullscreen or not.
@@ -60,4 +85,6 @@ uint32_t Window::GetWindowFlags()
 
 Window::~Window()
 {
+    renderer.reset();
+    window.reset();
 }

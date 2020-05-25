@@ -25,11 +25,19 @@ int main()
         return EXIT_FAILURE;
     }
 
-    auto win = std::make_unique<Window>(
-            std::string{VK::name},
-            VK::defaultWindowWidth,
-            VK::defaultWindowHeight
-    );
+    try
+    {
+        auto win = std::make_unique<Window>(
+                std::string{VK::name},
+                VK::defaultWindowWidth,
+                VK::defaultWindowHeight
+        );
+    }
+    catch (const std::exception& e)
+    {
+        CRITICAL("Could not initialise a window: {}", e.what());
+        return EXIT_FAILURE;
+    }
 
     INFO("{} v{} ready", VK::name, VK::version);
 
