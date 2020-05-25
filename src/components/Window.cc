@@ -76,7 +76,7 @@ void Window::Render()
     SDL_RenderPresent(renderer.get());
 }
 
-void Window::SetFullscreen(bool fullscreen)
+bool Window::SetFullscreen(bool fullscreen)
 {
     uint32_t flags = GetWindowFlags();
     if (fullscreen)
@@ -87,7 +87,27 @@ void Window::SetFullscreen(bool fullscreen)
     {
         flags &= ~SDL_WINDOW_FULLSCREEN;
     }
-    SDL_SetWindowFullscreen(window.get(), flags);
+    if (SDL_SetWindowFullscreen(window.get(), flags))
+    {
+        ERROR("Failed to set window {}fullscreen: {}", (fullscreen ? "" : "not "), SDL_GetError());
+        return false;
+    }
+    return true;
+}
+
+bool Window::SetScale(float scale)
+{
+    return SetScale(scale, scale);
+}
+
+bool Window::SetScale(float scaleX, float scaleY)
+{
+    if (SDL_RenderSetScale(renderer.get(), scaleX, scaleY))
+    {
+        ERROR("Failed to set scale: {}", SDL_GetError());
+        return false;
+    }
+    return true;
 }
 
 // Returns a value masked with the current window state flags

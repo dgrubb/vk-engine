@@ -16,8 +16,8 @@ namespace VK
     static constexpr char name[] = "VK Engine";
     static constexpr char version[] = "0.0.1";
     static constexpr Log::Levels defaultLogLevel = Log::DEBUG;
-    static constexpr int defaultWindowWidth = 800;
-    static constexpr int defaultWindowHeight = 600;
+    static constexpr int defaultWindowWidth = 256;
+    static constexpr int defaultWindowHeight = 240;
 }
 
 #endif // VKENGINE_H

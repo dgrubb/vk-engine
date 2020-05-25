@@ -34,7 +34,9 @@ class Window
         bool GetFullscreen();
 
         // Setters
-        void SetFullscreen(bool fullscreen);
+        bool SetFullscreen(bool fullscreen);
+        bool SetScale(float scale);
+        bool SetScale(float scaleX, float scaleY);
 
         // Methods
         void Clear();
