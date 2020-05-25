@@ -8,7 +8,7 @@
 #define VKENGINE_H
 
 // Project includes
-#include "util/Log.h"
+#include "Log.h"
 
 namespace VK
 {

@@ -18,7 +18,8 @@ CPPFLAGS = -O3 \
 # Include directories
 INC = -I./ \
 	  -I./util \
-	  -I./include
+	  -I./include \
+	  -I./components
 
 # Source files
 SRCS = VKEngine.cc \

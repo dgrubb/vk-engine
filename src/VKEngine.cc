@@ -9,8 +9,8 @@
 #include <cstdlib> // EXIT_n macros
 
 // Project includes
-#include "components/Window.h"
-#include "util/Video.h"
+#include "Window.h"
+#include "Video.h"
 
 int main()
 {
