@@ -7,7 +7,10 @@
 #ifndef VKENGINE_H
 #define VKENGINE_H
 
+#include <memory> // unique_ptr
+
 // Project includes
+#include "Window.h"
 #include "Log.h"
 
 namespace VK

@@ -40,6 +40,7 @@ class Window
 
         // Methods
         void Clear();
+        void Render();
 
     private:
 
@@ -49,7 +50,6 @@ class Window
 
         // Methods
         uint32_t GetWindowFlags();
-        void Render();
 };
 
 #endif // WINDOW_H

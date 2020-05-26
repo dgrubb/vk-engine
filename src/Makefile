@@ -22,6 +22,7 @@ INC = -I./ \
 # Source files
 SRCS = VKEngine.cc \
 	components/Window.cc \
+	util/Input.cc \
 	util/Log.cc \
 	util/Video.cc
 
