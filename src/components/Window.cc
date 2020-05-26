@@ -49,7 +49,7 @@ Window::Window(std::string name, int width, int height)
     }
     int w, h;
     SDL_GetWindowSize(window.get(), &w, &h);
-    INFO("Created window [{}]: {}x{}", SDL_GetWindowTitle(window.get()), w, h);
+    INFO("Created window [ ", SDL_GetWindowTitle(window.get()), " ]: ", w, "x", h);
 }
 
 void Window::Clear()
@@ -89,7 +89,7 @@ bool Window::SetFullscreen(bool fullscreen)
     }
     if (SDL_SetWindowFullscreen(window.get(), flags))
     {
-        ERROR("Failed to set window {}fullscreen: {}", (fullscreen ? "" : "not "), SDL_GetError());
+        ERROR("Failed to set window ", (fullscreen ? "" : "not ") ,"fullscreen: ", SDL_GetError());
         return false;
     }
     return true;
@@ -104,7 +104,7 @@ bool Window::SetScale(float scaleX, float scaleY)
 {
     if (SDL_RenderSetScale(renderer.get(), scaleX, scaleY))
     {
-        ERROR("Failed to set scale: {}", SDL_GetError());
+        ERROR("Failed to set scale: ", SDL_GetError());
         return false;
     }
     return true;

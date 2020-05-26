@@ -12,13 +12,11 @@ CPPFLAGS = -O3 \
 		   -pedantic \
 		   -Wall \
 		   -Werror \
-		   # Going to walk on the wild side
 		   -std=c++2a
 
 # Include directories
 INC = -I./ \
 	  -I./util \
-	  -I./include \
 	  -I./components
 
 # Source files

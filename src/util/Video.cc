@@ -21,7 +21,7 @@ bool Init()
     DEBUG("Starting SDL");
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO))
     {
-        ERROR("Failed to open SDL: {}", SDL_GetError());
+        ERROR("Failed to open SDL: ", SDL_GetError());
         return false;
     }
     return true;
@@ -29,7 +29,7 @@ bool Init()
 
 void Deinit()
 {
-    DEBUG("Closing SDL");
+//    DEBUG("Closing SDL");
     SDL_Quit();
 }
 

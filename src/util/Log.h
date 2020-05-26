@@ -10,28 +10,27 @@
 #ifndef LOG_H
 #define LOG_H
 
-// Third-party libraries
-#include <spdlog/spdlog.h>
-#include <spdlog/sinks/stdout_color_sinks.h>
+// C++ standard includes
+#include <iostream> // cout
+#include <sstream>  // ostringstream
 
-// Wrapper library specific macros with generic ones
-#define TRACE(...) \
-    SPDLOG_TRACE(__VA_ARGS__);
+#define TRACE(...) if (Log::Levels::TRACE >= Log::GetCurrentLevel()) \
+    Log::Log("TRACE", __LINE__, __FILE__, __FUNCTION__, __VA_ARGS__)
 
-#define DEBUG(...) \
-    SPDLOG_DEBUG(__VA_ARGS__);
+#define DEBUG(...) if (Log::Levels::DEBUG >= Log::GetCurrentLevel()) \
+    Log::Log("DEBUG", __LINE__, __FILE__, __FUNCTION__, __VA_ARGS__)
 
-#define INFO(...) \
-    SPDLOG_INFO(__VA_ARGS__);
+#define INFO(...) if (Log::Levels::INFO >= Log::GetCurrentLevel()) \
+    Log::Log("INFO", __LINE__, __FILE__, __FUNCTION__, __VA_ARGS__)
 
-#define WARN(...) \
-    SPDLOG_WARNING(__VA_ARGS__);
+#define WARN(...) if (Log::Levels::WARN >= Log::GetCurrentLevel()) \
+    Log::Log("WARN", __LINE__, __FILE__, __FUNCTION__, __VA_ARGS__)
 
-#define ERROR(...) \
-    SPDLOG_ERROR(__VA_ARGS__);
+#define ERROR(...) if (Log::Levels::ERROR >= Log::GetCurrentLevel()) \
+    Log::Log("ERROR", __LINE__, __FILE__, __FUNCTION__, __VA_ARGS__)
 
-#define CRITICAL(...) \
-    SPDLOG_CRITICAL(__VA_ARGS__);
+#define CRITICAL(...) if (Log::Levels::CRITICAL >= Log::GetCurrentLevel()) \
+    Log::Log("CRITICAL", __LINE__, __FILE__, __FUNCTION__, __VA_ARGS__)
 
 namespace Log {
 
@@ -44,7 +43,19 @@ enum Levels {
     CRITICAL
 };
 
+template <typename ...Args>
+void Log(const char* level, int line, const char* file, const char* function, Args&& ...args)
+{
+    std::ostringstream ss;
+    ss << "[" << level << "] " << file << ":" << line << " ( " << function << " ) ";
+    (ss << ... << std::forward<Args>(args)) << "\n";
+
+    std::cout << ss.str().c_str();
+}
+
 bool Init(Levels level);
+Levels GetCurrentLevel();
+void SetCurrentLevel(Levels level);
 
 }
 

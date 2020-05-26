@@ -2,20 +2,10 @@
 // Author: dgrubb
 // Date: 24/05/2020
 //
-// Implements logging functionality through the spdlog library (MIT-licensed).
-// That library's functionality is wrappered here in case I decide to change
-// the logging library at a later date and I'll only have to update a single 
-// set of files.
+// Implements logging functionality.
 
 // Implementation include
 #include "Log.h"
-
-// C++ library includes
-#include <iostream> // cout, endl
-
-// Third-party libraries
-#include <spdlog/spdlog.h>
-#include <spdlog/sinks/stdout_color_sinks.h>
 
 // Project includes
 #include "VKEngine.h"
@@ -23,32 +13,22 @@
 namespace Log
 {
 
-static constexpr spdlog::level::level_enum LogLevelTable[] = {
-    spdlog::level::trace,
-    spdlog::level::debug,
-    spdlog::level::info,
-    spdlog::level::warn,
-    spdlog::level::err,
-    spdlog::level::critical
-};
+Levels current = VK::defaultLogLevel;
 
-// Sets up logging which is particular to this project such as
-// formatting and log levels
 bool Init(Levels level)
 {
-    try
-    {
-        auto console = spdlog::stdout_color_mt(VK::name);
-        console->set_level(LogLevelTable[static_cast<int>(level)]);
-        spdlog::set_default_logger(console);
-    }
-    catch (const spdlog::spdlog_ex& e)
-    {
-        std::cout << "Logger init failed: " << e.what() << std::endl;
-        return false;
-    }
-
+    SetCurrentLevel(level);
     return true;
+}
+
+Levels GetCurrentLevel()
+{
+    return current;
+}
+
+void SetCurrentLevel(Levels level)
+{
+    current = level;
 }
 
 }

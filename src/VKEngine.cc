@@ -6,7 +6,8 @@
 #include "VKEngine.h"
 
 // C-style library includes
-#include <cstdlib> // EXIT_n macros
+#include <cstdlib>  // EXIT_n macros
+#include <iostream> // cout, endl
 
 // Project includes
 #include "Window.h"
@@ -16,6 +17,7 @@ int main()
 {
     if (!Log::Init(VK::defaultLogLevel))
     {
+        std::cout << "Couldn't start logger" << std::endl;
         return EXIT_FAILURE;
     }
 
@@ -35,11 +37,11 @@ int main()
     }
     catch (const std::exception& e)
     {
-        CRITICAL("Could not initialise a window: {}", e.what());
+        CRITICAL("Could not initialise a window: ", e.what());
         return EXIT_FAILURE;
     }
 
-    INFO("{} v{} ready", VK::name, VK::version);
+    INFO(VK::name," v", VK::version ," ready");
 
     Video::Deinit();
 
