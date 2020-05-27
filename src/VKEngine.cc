@@ -74,7 +74,11 @@ void MainLoop(std::unique_ptr<Window> win)
         while (!inputQ.Empty())
         {
             auto in = inputQ.Dequeue();
-            if (in == Input::Event::EXIT_REQUEST) quit = true;
+            if (in == Input::Event::EXIT_REQUEST)
+            {
+                INFO("Exit requested");
+                quit = true;
+            }
         }
     }
 }

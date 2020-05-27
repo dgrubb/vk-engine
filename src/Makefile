@@ -4,7 +4,7 @@
 
 # Aliases
 CC  = gcc
-CPP = g++
+CPP = g++-8
 RM  = rm -rf
 
 CPPFLAGS = -O3 \
@@ -17,21 +17,18 @@ CPPFLAGS = -O3 \
 # Include directories
 INC = -I./ \
 	  -I./util \
-	  -I./components
+	  -I./modules
 
 # Source files
 SRCS = VKEngine.cc \
-	components/Window.cc \
+	modules/Window.cc \
 	util/Input.cc \
 	util/Log.cc \
 	util/Video.cc
 
 OBJS=$(subst .cc,.o,$(SRCS))
 
-LDFLAGS=-lconfig \
-		-lrt \
-		-lpthread \
-		-lSDL2 \
+LDFLAGS=-lSDL2 \
 		-lSDL2_image
 
 ####################

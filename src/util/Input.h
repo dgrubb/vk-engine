@@ -8,7 +8,7 @@
 #define INPUT_H
 
 // Project includes
-#include "components/Queue.h"
+#include "modules/Queue.h"
 
 namespace Input
 {
