@@ -110,6 +110,16 @@ bool Window::SetScale(float scaleX, float scaleY)
     return true;
 }
 
+bool Window::Update()
+{
+    if (SDL_UpdateWindowSurface(window.get()))
+    {
+        ERROR("Failed to update window surface: ", SDL_GetError());
+        return false;
+    }
+    return true;
+}
+
 // Returns a value masked with the current window state flags
 uint32_t Window::GetWindowFlags()
 {

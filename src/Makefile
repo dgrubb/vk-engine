@@ -4,7 +4,7 @@
 
 # Aliases
 CC  = gcc
-CPP = g++-8
+CPP = g++
 RM  = rm -rf
 
 CPPFLAGS = -O3 \
