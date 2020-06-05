@@ -21,6 +21,7 @@ INC = -I./ \
 
 # Source files
 SRCS = VKEngine.cc \
+	modules/ScrollingLayer.cc \
 	modules/Window.cc \
 	util/Input.cc \
 	util/Log.cc \
